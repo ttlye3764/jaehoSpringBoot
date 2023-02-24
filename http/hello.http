@@ -1,2 +1,5 @@
-### 1. Hello Test
+### 1. GET Hello Test
+GET {{domain}}/hello?name=Spring
+
+### 2. POST Hello Test
 POST {{domain}}/hello?name=Spring
