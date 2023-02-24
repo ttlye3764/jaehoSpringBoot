@@ -29,9 +29,11 @@ public class JaehoSpringBootApplication {
 
         // tomcat 시작.
         ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
+
+        HelloController helloController = new HelloController();
+
         WebServer webServer = serverFactory.getWebServer(servletContext -> {
              servletContext.addServlet("frontController", new HttpServlet() {
-
                  @Override
                  protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -40,10 +42,12 @@ public class JaehoSpringBootApplication {
                      if ("/hello".equals(req.getRequestURI())
                              && req.getMethod().equals(HttpMethod.GET.name())) {
                          String name = req.getParameter("name");
+                         String ret = helloController.hello(name);
 
                          resp.setStatus(HttpStatus.OK.value());
                          resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                         resp.getWriter().println("Hello Servlet" + name);
+                         resp.getWriter().println(ret);
+
                      } else if ("/user".equals(req.getRequestURI())) {
 
                      } else {
