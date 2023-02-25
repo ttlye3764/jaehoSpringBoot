@@ -44,7 +44,6 @@ public class JaehoSpringBootApplication {
         // 1. Bean이 뭐가 들어갈지
         // 2. resource에 접근하는 방법
         // 3. 이벤트에 뭐 어쩌고 하는 방법 등등.
-
         GenericApplicationContext applicationContext = new GenericApplicationContext();
         applicationContext.registerBean(HelloController.class);
         applicationContext.refresh();
