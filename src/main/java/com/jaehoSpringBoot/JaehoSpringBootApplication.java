@@ -17,6 +17,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebApplicationContext;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
@@ -42,17 +43,8 @@ import java.io.IOException;
 
 //@SpringBootApplication
 @Configuration
+@ComponentScan
 public class JaehoSpringBootApplication {
-
-    @Bean
-    public HelloController HelloController (HelloService helloService) {
-        return new HelloController(helloService);
-    }
-
-    @Bean
-    public HelloService SimpleHelloService () {
-        return new SimpleHelloService();
-    }
 
     public static void main(String[] args) {
         AnnotationConfigServletWebApplicationContext applicationContext = new AnnotationConfigServletWebApplicationContext() {
