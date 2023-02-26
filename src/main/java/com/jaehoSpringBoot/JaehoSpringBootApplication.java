@@ -1,5 +1,6 @@
 package com.jaehoSpringBoot;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebApplicationContext;
@@ -25,7 +26,7 @@ public class JaehoSpringBootApplication {
     }
 
     public static void main(String[] args) {
-        MySpringApplication.run(JaehoSpringBootApplication.class, args);
+        SpringApplication.run(JaehoSpringBootApplication.class, args);
     }
 
 
