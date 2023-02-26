@@ -14,7 +14,10 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebApplicationContext;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -38,12 +41,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 //@SpringBootApplication
+@Configuration
 public class JaehoSpringBootApplication {
+
+    @Bean
+    public HelloController HelloController (HelloService helloService) {
+        return new HelloController(helloService);
+    }
+
+    @Bean
+    public HelloService SimpleHelloService () {
+        return new SimpleHelloService();
+    }
+
     public static void main(String[] args) {
-
-//        SpringApplication.run(JaehoSpringBootApplication.class, args);
-
-        GenericWebApplicationContext applicationContext = new GenericWebApplicationContext() {
+        AnnotationConfigServletWebApplicationContext applicationContext = new AnnotationConfigServletWebApplicationContext() {
             @Override
             protected void onRefresh() {
                 super.onRefresh();
@@ -55,10 +67,9 @@ public class JaehoSpringBootApplication {
                 webServer.start();
             }
         };
-        applicationContext.registerBean(HelloController.class);
-        applicationContext.registerBean(SimpleHelloService.class);
 
         // template pattern
+        applicationContext.register(JaehoSpringBootApplication.class);
         applicationContext.refresh();
 
 
