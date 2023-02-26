@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Objects;
 
 @RequestMapping
-@Component
+@MyComponent
 public class HelloController {
 
     private final HelloService helloService;
