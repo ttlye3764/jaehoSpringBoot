@@ -46,6 +46,7 @@ public class JaehoSpringBootApplication {
         // 3. 이벤트에 뭐 어쩌고 하는 방법 등등.
         GenericApplicationContext applicationContext = new GenericApplicationContext();
         applicationContext.registerBean(HelloController.class);
+        applicationContext.registerBean(SimpleHelloService.class);
         applicationContext.refresh();
 
         // tomcat 시작.
@@ -54,9 +55,9 @@ public class JaehoSpringBootApplication {
              servletContext.addServlet("frontController", new HttpServlet() {
                  @Override
                  protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                     // 각종 공통 기능 처리
-                     //  - 인증, 보안, 다국어 등.
-
+                     //  각종 공통 기능 처리
+                     // - 인증, 보안, 다국어 등.
+                     //
                      if ("/hello".equals(req.getRequestURI()) // 매핑
                              && req.getMethod().equals(HttpMethod.GET.name())) {
 
