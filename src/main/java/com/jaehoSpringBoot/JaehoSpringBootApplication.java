@@ -24,6 +24,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.GenericWebApplicationContext;
@@ -46,14 +47,30 @@ import java.io.IOException;
 @ComponentScan
 public class JaehoSpringBootApplication {
 
+    @Bean
+    public ServletWebServerFactory servletWebServerFactory() {
+        return new TomcatServletWebServerFactory();
+    }
+
+    @Bean
+    public DispatcherServlet dispatcherServlet() {
+        return new DispatcherServlet();
+    }
+
     public static void main(String[] args) {
         AnnotationConfigServletWebApplicationContext applicationContext = new AnnotationConfigServletWebApplicationContext() {
             @Override
             protected void onRefresh() {
                 super.onRefresh();
-                ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
+
+                ServletWebServerFactory serverFactory = this.getBean(ServletWebServerFactory.class);
+                DispatcherServlet dispatcherServlet = this.getBean(DispatcherServlet.class);
+
+                // 직접 스프링 applicationContext를 등록해주지 않아도 동작을 한다.
+//                dispatcherServlet.setApplicationContext(this);
+
                 WebServer webServer = serverFactory.getWebServer(servletContext -> {
-                    servletContext.addServlet("dispatcherServlet", new DispatcherServlet(this))
+                    servletContext.addServlet("dispatcherServlet", dispatcherServlet)
                             .addMapping("/*");
                 });
                 webServer.start();
