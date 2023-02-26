@@ -11,19 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.DispatcherServlet;
 
 //@SpringBootApplication
-@Configuration
-@ComponentScan
+@MySpringBootAnnotation
 public class JaehoSpringBootApplication {
-
-    @Bean
-    public ServletWebServerFactory servletWebServerFactory() {
-        return new TomcatServletWebServerFactory();
-    }
-
-    @Bean
-    public DispatcherServlet dispatcherServlet() {
-        return new DispatcherServlet();
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(JaehoSpringBootApplication.class, args);
