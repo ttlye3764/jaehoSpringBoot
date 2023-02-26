@@ -1,6 +1,7 @@
 package com.jaehoSpringBoot;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import java.util.Objects;
 @RestController
 public class HelloController  {
     private final HelloService helloService;
-    public HelloController(HelloService helloService) {
+    public HelloController(@Qualifier("helloDecorator") HelloService helloService) {
         this.helloService = helloService;
     }
 
