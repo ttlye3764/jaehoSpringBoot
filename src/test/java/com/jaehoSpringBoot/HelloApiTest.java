@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 
 
 public class HelloApiTest {
-
+	// test
     @Test
     void helloApi() {
         // http localhost:8080/hello?name=Spring
